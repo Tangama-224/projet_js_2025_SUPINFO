@@ -1,0 +1,178 @@
+/* Section Recherche */
+main {
+    padding: 20px;
+}
+
+.recherche {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.recherche h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.bar-recherche {
+    position: relative; /* Nécessaire pour positionner la liste des suggestions en dessous */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    margin-bottom: 1%;
+    margin-left: 390px;
+}
+
+.bar-recherche input[type="text"] {
+    width: 60%;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: box-shadow 0.3s;
+}
+
+.bar-recherche input[type="text"]:focus {
+    box-shadow: 0 0 5px #2c3e50;
+}
+
+/* Liste des suggestions */
+.suggestions-list {
+    display: none; /* Masquée par défaut */
+    position: absolute; /* Positionnement absolu pour qu'elle apparaisse sous la barre de recherche */
+    top: 100%; /* Positionner juste sous l'input */
+    left: 0;
+    width: 60%; /* Même largeur que la barre de recherche */
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    max-height: 250px;
+    overflow-y: auto; /* Ajouter une barre de défilement si trop de suggestions */
+    z-index: 1000; /* S'assurer que la liste est au-dessus des autres éléments */
+}
+
+/* Chaque élément de suggestion */
+.suggestions-list li {
+    padding: 10px;
+    font-size: 1rem;
+    color: #2c3e50;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Survol d'un élément */
+.suggestions-list li:hover {
+    background-color: #f0f8ff;
+}
+
+/* Lorsque la liste est vide ou qu'il n'y a pas de suggestions */
+.suggestions-list li.empty {
+    color: #999;
+    cursor: default;
+}
+
+.bar-recherche button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #2c3e50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 300px;
+}
+
+.bar-recherche button:hover {
+    background-color: #34495e;
+}
+
+/* Résultats de recherche */
+.resultats-div {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.resultats-div div {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: left;
+}
+
+.resultats-div img {
+    width: 250px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.resultats-div h3 {
+    margin: 10px;
+    font-size: 1.2rem;
+    color: #2c3e50;
+}
+
+.resultats-div p {
+    margin: 10px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.resultats-div a {
+    display: block;
+    margin: 10px;
+    padding: 8px;
+    background-color: #2c3e50;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.resultats-div a:hover {
+    background-color: #34495e;
+}
+
+#charger {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #2c3e50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#charger:hover {
+    background-color: #34495e;
+}
+
+/* Pied de page */
+footer {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    text-align: center;
+}
+
+footer .reseau_social a {
+    color: #e74c3c;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+footer .reseau_social a:hover {
+    color: #c0392b;
+}

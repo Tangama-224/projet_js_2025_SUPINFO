@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="search.css">
+    <link rel="icon" href="logo_filmora.webp">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <title>Recherche - CineMora</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+              <a href="index.html">CineMora</a>
+    
+              <ul class="menu_navigation">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="search.html">Recherche</a></li>
+              </ul>
+            </div>
+          </nav>
+    </header>
+    <main>
+        <section class="recherche">
+            <h1>Rechercher un film</h1>
+            <div class="bar-recherche">
+                <input 
+                    type="text" 
+                    id="entre-recherche" 
+                    placeholder="Rechercher par titre..." 
+                    autocomplete="off"
+                >
+                <ul id="suggestions-list" class="suggestions-list"></ul> <!-- Liste des suggestions -->
+                <button id="rech-Button">Rechercher</button>
+            </div>
+            <div id="resultat" class="resultats-div">
+                <!-- Les résultats de recherche s'afficheront ici -->
+            </div>
+            <button id="charger" style="display: none;">Charger plus de résultats</button>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 CineMora. Tous droits réservés.</p>
+        <div class="reseau_social">
+            <a href="#" target="_blank">Facebook</a>
+            <a href="#" target="_blank">Twitter</a>
+            <a href="#" target="_blank">Instagram</a>
+        </div>
+    </footer>
+    <script src="search.js" defer></script>
+</body>
+</html>
