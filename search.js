@@ -1,69 +1,77 @@
-const cleApi = "c79e3cf0";
+
+const apiKey = "c79e3cf0";
 
 // Sélection des éléments DOM
-const champ_Recherche = document.getElementById("entre-recherche");
-const resultat_Div = document.getElementById("resultat");
-const bouton_Charger = document.getElementById("charger");
+const searchInput = document.getElementById("entre-recherche");
+const resultsDiv = document.getElementById("resultat");
+const loadMoreButton = document.getElementById("charger");
 
 // Variables pour gérer la pagination
-let pageActuelle = 1;
-let termeRecherche = "";
+let currentPage = 1;
+let currentSearchTerm = "";
 
 // Fonction pour rechercher des films
-const rechercherFilms = async (terme, page = 1) => {
+const searchMovies = async (searchTerm, page = 1) => {
     try {
-        const url = `https://www.omdbapi.com/?apikey=${cleApi}&s=${encodeURIComponent(terme)}&page=${page}`;
-        const reponse = await fetch(url);
-        const donnees = await reponse.json();
+        const url = `https://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(searchTerm)}&page=${page}`;
+        const response = await fetch(url);
+        const data = await response.json();
 
-        // Si des films sont trouvés, les afficher
-        if (donnees.Response === "True") {
-            donnees.Search.forEach((film) => {
-                const carteFilm = `
-                    <div class="carte-film">
-                        <img src="${film.Poster !== "N/A" ? film.Poster : "./2024.jpg"}" alt="${film.Title}">
-                        <h3>${film.Title}</h3>
-                        <p>Année : ${film.Year}</p>
-                        <a href="movie.html?id=${film.imdbID}" target="_blank">Détails</a>
-                    </div>
-                `;
-                resultat_Div.innerHTML += carteFilm;
-            });
+        if (data.Response === "True") {
+            const moviesHTML = data.Search.map((movie) => `
+                <div class="movie-card">
+                    <img src="${movie.Poster !== "N/A" ? movie.Poster : "./2024.jpg"}" alt="${movie.Title}">
+                    <h3>${movie.Title}</h3>
+                    <p>Année : ${movie.Year}</p>
+                    <a href="movie.html?id=${movie.imdbID}" target="_blank">Détails</a>
+                </div>
+            `).join(""); // Utilisation de `.join("")` pour combiner les résultats
 
-            // Afficher le bouton "Charger plus de résultats" si d'autres pages existent
-            bouton_Charger.style.display = donnees.Search.length >= 10 ? "block" : "none";
+            resultsDiv.innerHTML += moviesHTML;
+
+            loadMoreButton.style.display = data.Search.length >= 10 ? "block" : "none";
         } else {
-            // Si aucun film n'est trouvé
             if (page === 1) {
-                resultat_Div.innerHTML = `<p class="message-erreur">${donnees.Error}</p>`;
-                bouton_Charger.style.display = "none";
+                resultsDiv.innerHTML = `<p class="error-message">${data.Error}</p>`;
+                loadMoreButton.style.display = "none";
             }
         }
-    } catch (erreur) {
-        resultat_Div.innerHTML = `<p class="message-erreur">Une erreur est survenue. Veuillez réessayer.</p>`;
+    } catch (error) {
+        resultsDiv.innerHTML = `<p class="error-message">Une erreur est survenue. Veuillez réessayer.</p>`;
     }
 };
 
+
 // Gestion de la recherche en temps réel
-champ_Recherche.addEventListener("input", () => {
-    const terme = champ_Recherche.value.trim();
+searchInput.addEventListener("input", () => {
+    const searchTerm = searchInput.value.trim();
 
     // Si l'utilisateur entre un texte valide
-    if (terme && terme !== termeRecherche) {
-        termeRecherche = terme;
-        pageActuelle = 1;
-        resultat_Div.innerHTML = ""; // Réinitialiser les résultats
-        rechercherFilms(terme); // Lancer la recherche
-    } else if (!terme) {
+    if (searchTerm && searchTerm !== currentSearchTerm) {
+        currentSearchTerm = searchTerm;
+        currentPage = 1;
+        resultsDiv.innerHTML = ""; // Réinitialiser les résultats
+        searchMovies(searchTerm); // Lancer la recherche
+    } else if (!searchTerm) {
         // Si le champ est vide, réinitialiser tout
-        termeRecherche = "";
-        resultat_Div.innerHTML = "";
-        bouton_Charger.style.display = "none";
+        currentSearchTerm = "";
+        resultsDiv.innerHTML = "";
+        loadMoreButton.style.display = "none";
     }
 });
 
 // Gestion du bouton "Charger plus de résultats"
-bouton_Charger.addEventListener("click", () => {
-    pageActuelle++;
-    rechercherFilms(termeRecherche, pageActuelle);
+loadMoreButton.addEventListener("click", () => {
+    currentPage++;
+    searchMovies(currentSearchTerm, currentPage);
 });
+
+// Navbar Scroll
+window.addEventListener('scroll', function () {
+    const navbar = document.getElementById('navbar');
+    if (window.scrollY > 50) {
+      navbar.classList.add('transparent');
+    } else {
+      navbar.classList.remove('transparent');
+    }
+  });

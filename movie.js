@@ -1,59 +1,59 @@
-const cleApi = "c79e3cf0";
+const apiKey = "c79e3cf0";
 
-const parametresUrl = new URLSearchParams(window.location.search);
-const idFilm = parametresUrl.get('id');
+const urlParams = new URLSearchParams(window.location.search);
+const movieId = urlParams.get('id');
 
-const titreFilm = document.getElementById('titre-film');
-const afficheFilm = document.getElementById('affiche-film');
-const resumeFilm = document.getElementById('resume-film');
-const genresFilm = document.getElementById('genres-film');
-const acteursFilm = document.getElementById('acteurs-film');
-const rangFilm = document.getElementById('rang-film');
-const sortieFilm = document.getElementById('sortie-film');
+const titleElement = document.getElementById('movie-title');
+const posterElement = document.getElementById('movie-poster');
+const summaryElement = document.getElementById('movie-summary');
+const genreElement = document.getElementById('movie-genre');
+const actorsElement = document.getElementById('movie-actors');
+const ratingElement = document.getElementById('movie-rating');
+const dvdReleaseElement = document.getElementById('movie-dvd-release');
 
 // Fonction pour récupérer les détails du film depuis l'API
-async function recupererDetailsFilm(id) {
+async function fetchMovieDetails(id) {
   try {
-    const reponse = await fetch(`https://www.omdbapi.com/?i=${id}&apikey=${cleApi}`);
-    if (!reponse.ok) {
+    const response = await fetch(`https://www.omdbapi.com/?i=${id}&apikey=${apiKey}`);
+    if (!response.ok) {
       throw new Error("Erreur lors de la récupération des données.");
     }
-    const donnees = await reponse.json();
-    if (donnees.Response === "False") {
-      throw new Error(donnees.Error);
+    const data = await response.json();
+    if (data.Response === "False") {
+      throw new Error(data.Error);
     }
     return {
-      titre: donnees.Title,
-      affiche: donnees.Poster,
-      resume: donnees.Plot,
-      genres: donnees.Genre,
-      acteurs: donnees.Actors.split(", "),
-      rang: donnees.imdbRating,
-      sortieDvd: donnees.DVD,
+      title: data.Title,
+      poster: data.Poster,
+      summary: data.Plot,
+      genre: data.Genre,
+      actors: data.Actors.split(", "),
+      rating: data.imdbRating,
+      dvdRelease: data.DVD,
     };
-  } catch (erreur) {
-    console.error("Erreur :", erreur.message);
+  } catch (error) {
+    console.error("Erreur :", error.message);
     alert("Impossible de charger les détails du film. Vérifiez l'identifiant ou réessayez plus tard.");
   }
 }
 
 // Charger les détails du film et les insérer dans le DOM
-async function chargerDetailsFilm() {
-  if (!idFilm) {
+async function loadMovieDetails() {
+  if (!movieId) {
     alert("Aucun identifiant de film spécifié.");
     return;
   }
-  const film = await recupererDetailsFilm(idFilm);
-  if (film) {
-    titreFilm.textContent = film.titre;
-    afficheFilm.src = film.affiche !== "N/A" ? film.affiche : "./2024.jpg";
-    afficheFilm.alt = `Affiche de ${film.titre}`;
-    resumeFilm.textContent = film.resume;
-    genresFilm.textContent = film.genres;
-    acteursFilm.textContent = film.acteurs.join(', ');
-    rangFilm.textContent = film.rang || "N/A";
-    sortieFilm.textContent = film.sortieDvd ? new Date(film.sortieDvd).toLocaleDateString('fr-FR') : "Non disponible";
+  const movie = await fetchMovieDetails(movieId);
+  if (movie) {
+    titleElement.textContent = movie.title;
+    posterElement.src = movie.poster !== "N/A" ? movie.poster : "placeholder.jpg";
+    posterElement.alt = `Affiche de ${movie.title}`;
+    summaryElement.textContent = movie.summary;
+    genreElement.textContent = movie.genre;
+    actorsElement.textContent = movie.actors.join(', ');
+    ratingElement.textContent = movie.rating || "N/A";
+    dvdReleaseElement.textContent = movie.dvdRelease ? new Date(movie.dvdRelease).toLocaleDateString('fr-FR') : "Non disponible";
   }
 }
 
-chargerDetailsFilm();
+loadMovieDetails();

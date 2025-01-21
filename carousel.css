@@ -1,0 +1,75 @@
+.carousel-container {
+    text-align: center;
+    margin: 50px auto;
+    position: relative;
+    max-width: 500px; /* Largeur du carousel */
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.carousel {
+    position: relative;
+}
+
+.carousel-track-container {
+    overflow: hidden;
+    width: 500px; /* Largeur fixe de l'image visible */
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.carousel-track li {
+    min-width: 500px; /* Largeur exacte de chaque film */
+    height: 300px; /* Hauteur fixe */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-track img {
+    width: 100%; /* S'adapte au conteneur */
+    height: 100%; /* S'adapte au conteneur */
+    object-fit: cover; /* Centre l'image */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform .3s ease;
+}
+
+.carousel-track img:hover {
+    transform: scale(1.1);
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 57%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 10;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.carousel-btn.prev-btn {
+    left: 31%;
+}
+
+.carousel-btn.next-btn {
+    right: 31%;
+}
+
+.carousel-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
