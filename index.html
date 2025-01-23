@@ -4,15 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-
-    <link
-      rel="icon"
-      href="/DALL·E 2025-01-14 00.01.28 - A custom and innovative logo for 'FilmOra' with an emphasis on a capital 'O' and the rest of the letters in lowercase. The design should be simple, el.webp"
-    />
+    <link rel="stylesheet" href="carrousel.css" />  
     <title>CineMora</title>
   </head>
   <body>
-    <header>
+    <header id="navbar" class="navbar">
       <nav>
         <div class="logo">
           <a href="index.html">CineMora</a>
@@ -30,10 +26,20 @@
         <p>Explorez les films à l'affiche et trouvez vos favoris.</p>
       </section>
 
+      <button class="carrousel_prec">&#8249;</button>
+      <div class="carrousel_p">
+        <div class="carrousel_cont">
+          <ul class="carrousel_liste">
+            <!-- Les résultats de recherche s'afficheront ici -->
+          </ul>
+        </div>  
+      </div>
+      <button class="carrousel_suiv">&#8250;</button>
+
       <section class="tendance">
         <h2>Films Tendance</h2>
         <div class="grille_film">
-          <!-- Les films s'afficheront ici -->
+          <!-- Les résultats de recherche s'afficheront ici -->
         </div>
       </section>
       <button id="charger">Charger plus de films</button>
@@ -49,5 +55,27 @@
     </footer>
 
     <script src="script.js" defer></script>
+    <script src="carrousel.js" defer></script>
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
