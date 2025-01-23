@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="movie.css" />
+    <link rel="stylesheet" href="style.css" />
+    <title>CineMora - Accueil</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">
+          <a href="index.html">CineMora</a>
+        </div>
+        <ul class="menu_navigation">
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="search.html">Recherche</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h1 id="titre-film">Titre du Film</h1>
+      <section id="details-film" class="details">
+        <div class="affiche">
+          <img id="affiche-film" alt="Affiche du Film" />
+        </div>
+        <div class="infos">
+          <p id="resume-film" class="resume-film">Résumé du film</p>
+          <p><strong>Genre :</strong> <span id="genres-film"></span></p>
+          <p><strong>Acteurs :</strong> <span id="acteurs-film"></span></p>
+          <p><strong>Note :</strong> <span id="rang-film"></span></p>
+          <p>
+            <strong>Date de sortie DVD :</strong>
+            <span id="sortie-film"></span>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 CineMora | Tous droits réservés.</p>
+      <div class="reseau_social">
+        <a href="#" target="_blank">Facebook</a>
+        <a href="#" target="_blank">Twitter</a>
+        <a href="#" target="_blank">Instagram</a>
+      </div>
+    </footer>
+    <script src="script.js" defer></script>
+    <script src="movie.js" defer></script>
+  </body>
+</html>
